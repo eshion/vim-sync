@@ -43,9 +43,8 @@ Ctrl+d
     
 * if you want to auto upload/download file where save/open file, write these code in you .emacs config file:
  
-    autocmd BufWritePost * :call SyncUploadFile()
-
-    autocmd BufReadPre * :call SyncDownloadFile()
+        autocmd BufWritePost * :call SyncUploadFile()
+        autocmd BufReadPre * :call SyncDownloadFile()
 
     
 [bundle]:https://github.com/bundler/bundler/
