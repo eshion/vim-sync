@@ -74,6 +74,7 @@ fi
 * scp:
 
     referred to rsync
+* ...
 
 Alias
 ----
