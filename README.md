@@ -14,7 +14,7 @@ Usage
 
 create a execute file called .sync in your project directory.
 
-    <leader>su or 
+    <leader>su
     Upload current buffer file, it will execute the command: project_dir/.sync upload current_buffer_fold current_file_name
     
     <leader>sd
