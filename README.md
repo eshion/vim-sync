@@ -27,9 +27,9 @@ some execute config
 
      #!/bin/sh 
      if [ "upload" == $1 ];then 
-         rsync -azcuv -e "/bin/ssh -p36000 -q" `dirname $0`/$2/$3 login_name@remote_host:/remote_path/$2/$3 
+         rsync -azcuv -e "/bin/ssh -p36000 -q" \`dirname $0\`/$2/$3 login_name@remote_host:/remote_path/$2/$3 
      elif [ 'download' == $1 ];then 
-         rsync -azcuv -e "/bin/ssh -p36000 -q" login_name@remote_host:/remote_path/$2/$3 `dirname $0`/$2/$3 
+         rsync -azcuv -e "/bin/ssh -p36000 -q" login_name@remote_host:/remote_path/$2/$3 \`dirname $0\`/$2/$3 
      fi 
     
 * sftp:
