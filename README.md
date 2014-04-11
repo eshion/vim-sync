@@ -13,6 +13,7 @@ Usage
 ----
 
 create a execute file called .sync in your project directory.
+e.g. /project_dir/ is your project dirctory and the execute file is /project_dir/.sync
 
     <leader>su
     Upload current buffer file, it will execute the command: project_dir/.sync upload current_buffer_fold current_file_name
