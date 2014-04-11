@@ -41,6 +41,11 @@ Ctrl+u
 Ctrl+d  
     `nnoremap <C-U> <ESC>:call SyncDownloadFile()<CR>`
     
+* if you want to auto upload/download file where save/open file, write these code in you .emacs config file:
+    autocmd BufWritePost * :call SyncUploadFile()
+    autocmd BufReadPre * :call SyncDownloadFile()
+
+    
 [bundle]:https://github.com/bundler/bundler/
 [vundle]:https://github.com/gmarik/vundle/
 [pathogen]:https://github.com/tpope/vim-pathogen/
