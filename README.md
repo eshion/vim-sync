@@ -25,15 +25,42 @@ some execute config
 ----
 * rsync:
 <pre>
-    #!/bin/sh
-    if [ "upload" == $1 ];then
-        rsync -azcuv -e "/bin/ssh -p36000 -q" `dirname $0`/$2/$3 login_name@remote_host:/remote_path/$2/$3
-    elif [ 'download' == $1 ];then
-        rsync -azcuv -e "/bin/ssh -p36000 -q" login_name@remote_host:/remote_path/$2/$3 `dirname $0`/$2/$3
-    fi
+#!/bin/sh
+if [ "upload" == $1 ];then
+    rsync -azcuv -e "/bin/ssh -p36000 -q" `dirname $0`/$2/$3 login_name@remote_host:/remote_path/$2/$3
+elif [ 'download' == $1 ];then
+    rsync -azcuv -e "/bin/ssh -p36000 -q" login_name@remote_host:/remote_path/$2/$3 `dirname $0`/$2/$3
+fi
 </pre>
 * sftp:
-    
+<pre>
+#!/bin/sh
+if [ "upload" == $1 ];then
+    expect -c <<'END_EXPECT'
+	set timeout -1
+	spawn sftp login_name@1.2.3.4
+	expect "[Pp]assword:"
+	send "login_password\r"
+	expect "sftp>"
+	send "put `dirname $0`/$2/$3 /remote_path/$2/$3\r"
+	expect "%100"
+	send "quit\r"
+	expect eof
+	END_EXPECT
+elif [ 'download' == $1 ];then
+    expect -c <<'END_EXPECT'
+	set timeout -1
+	spawn sftp login_name@1.2.3.4
+	expect "[Pp]assword:"
+	send "login_password\r"
+	expect "sftp>"
+	send "get /remote_path/$2/$3 `dirname $0`/$2/$3 \r"
+	expect "%100"
+	send "quit\r"
+	expect eof
+	END_EXPECT
+fi
+</pre>
 * ftp:
 <pre>
 #!/bin/sh
@@ -43,6 +70,10 @@ elif [ 'download' == $1 ];then
   ncftpget -u login_name -p login_password -P 21 remote_host `dirname $0`/$2 remote_path/$2/$3 
 fi
 </pre>
+
+* scp:
+
+    referred to rsync
 
 Alias
 ----
