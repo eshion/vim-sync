@@ -1,7 +1,7 @@
 vim-sync
 ========
 
-Automatic sync local buffer to remote in vim
+Automatic sync local and remote file in vim
 
 
 Installation
