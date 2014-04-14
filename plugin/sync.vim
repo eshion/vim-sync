@@ -1,4 +1,7 @@
 function! SyncGetExe()
+  if '.sync' == expand('%')
+    return
+  endif
   let l:exe_path = expand('%:p:h')
   let l:exe_file = l:exe_path . '/.sync'
   let l:found_exe = ''
