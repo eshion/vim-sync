@@ -33,7 +33,7 @@ function! SyncUploadFile()
   let exe = SyncGetExe()
   if !empty(exe)
     let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
-    let cmd = printf("%s %s %s %s", exe, 'upload', fold, expand('%'))
+    let cmd = printf("%s %s %s %s", exe, 'upload', fold, shellescape(expand('%')))
     execute '!' . cmd
   endif
 endfunction
@@ -42,7 +42,7 @@ function! SyncDownloadFile()
   let exe = SyncGetExe()
   if !empty(exe)
     let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
-    let cmd = printf("%s %s %s %s", exe, 'download', fold, expand('%'))
+    let cmd = printf("%s %s %s %s", exe, 'download', fold, shellescape(expand('%')))
     execute '!' . cmd
   endif
 endfunction
