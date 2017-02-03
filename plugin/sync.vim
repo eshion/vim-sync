@@ -46,7 +46,7 @@ function! SyncDownloadFile()
     let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
     let filelist = split(expand('%:p'), '/')
     let file = filelist[-1]
-    let cmd = printf("%s %s %s %s", exe, 'upload', fold, shellescape(file))
+    let cmd = printf("%s %s %s %s", exe, 'download', fold, shellescape(file))
     execute '!' . cmd
   endif
 endfunction
