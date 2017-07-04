@@ -36,7 +36,7 @@ function! SyncUploadFile()
     let l:pdir = exe[0:strridx(exe, '/')]
     if l:fdir . '/' == l:pdir
         let fold = './'
-    else 
+    else
         let fold = substitute(l:fdir, l:pdir, '', '')
     endif
     "let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
@@ -50,7 +50,14 @@ endfunction
 function! SyncDownloadFile()
   let exe = SyncGetExe()
   if !empty(exe)
-    let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
+    "let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
+    let l:fdir = expand('%:p:h')
+    let l:pdir = exe[0:strridx(exe, '/')]
+    if l:fdir . '/' == l:pdir
+        let fold = './'
+    else
+        let fold = substitute(l:fdir, l:pdir, '', '')
+    endif
     let filelist = split(expand('%:p'), '/')
     let file = filelist[-1]
     let cmd = printf("%s %s %s %s", exe, 'download', fold, shellescape(file))
