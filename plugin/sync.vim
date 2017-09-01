@@ -32,7 +32,14 @@ endfunction
 function! SyncUploadFile()
   let exe = SyncGetExe()
   if !empty(exe)
-    let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
+    let dir = expand('%:p:h')
+    let fold = substitute(dir, exe[0:strridx(exe, '/')], "", "")
+
+    " For root dir files
+    if dir == fold
+      let fold = '.'
+    endif
+
     let filelist = split(expand('%:p'), '/')
     let file = filelist[-1]
     let cmd = printf("%s %s %s %s", exe, 'upload', fold, shellescape(file))
@@ -43,7 +50,14 @@ endfunction
 function! SyncDownloadFile()
   let exe = SyncGetExe()
   if !empty(exe)
-    let fold = substitute(expand('%:p:h'), exe[0:strridx(exe, '/')], "", "")
+    let dir = expand('%:p:h')
+    let fold = substitute(dir, exe[0:strridx(exe, '/')], "", "")
+
+    " For root dir files
+    if dir == fold
+      let fold = '.'
+    endif
+
     let filelist = split(expand('%:p'), '/')
     let file = filelist[-1]
     let cmd = printf("%s %s %s %s", exe, 'download', fold, shellescape(file))
