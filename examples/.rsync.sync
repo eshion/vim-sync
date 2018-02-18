@@ -1,0 +1,10 @@
+#!/bin/bash
+
+hostname='my_server'
+relative_path='my_project/src'
+
+if [[ 'upload' == $1 ]]; then
+    rsync -azcul --relative "$2/$3" "$hostname:$relative_path"
+elif [[ 'download' == $1 ]]; then
+    rsync -azcul "$hostname:$relative_path/$2/$3" "$2/$3"
+fi
